@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
+$clr-primary-700: hsl(209, 59%, 82%);
+$clr-primary-600: hsl(209, 59%, 86%);
+$clr-primary-400: hsl(225, 67%, 93%);
+$clr-primary-200: hsl(229, 52%, 96%);
+
+*::before,
+*::after,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Mukta;
+}
+
+html {
+  background-color: var(--clr-primary-400);
+}
