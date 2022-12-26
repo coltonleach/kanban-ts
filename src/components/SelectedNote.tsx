@@ -4,7 +4,7 @@ import { RiCloseLine } from 'react-icons/ri'
 type SelectedNoteProps = {
   activeNote: ActiveNote
   handleNoteClose: () => void
-  handleNoteDelete: (listId: number, noteId: number) => void
+  handleNoteDelete: (listId: string, noteId: string) => void
 }
 
 const SelectedNote = ({
@@ -24,7 +24,7 @@ const SelectedNote = ({
           <button
             className='btn-delete'
             onClick={() =>
-              handleNoteDelete(activeNote.listId, activeNote.note?.id)
+              handleNoteDelete(activeNote.listId!, activeNote.note?.id!)
             }
           >
             Delete

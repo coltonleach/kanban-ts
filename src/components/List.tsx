@@ -2,8 +2,8 @@ import { Note, List as ListType } from '../types/List.types'
 
 type ListProps = {
   list: ListType
-  handleAddNote: (listId: number) => void
-  handleNoteClick: (listId: number, noteId: number) => void
+  handleAddNote: (listId: string) => void
+  handleNoteClick: (listId: string, noteId: string) => void
 }
 
 const List = ({ list, handleAddNote, handleNoteClick }: ListProps) => {

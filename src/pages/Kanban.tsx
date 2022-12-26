@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import List from '../components/List'
 import SelectedNote from '../components/SelectedNote'
 import axios from 'axios'
+import { v4 as uuidv4 } from 'uuid'
 import { Note, List as ListType, ActiveNote } from '../types/List.types'
 
 function Kanban() {
@@ -12,7 +13,7 @@ function Kanban() {
     listId: undefined,
     note: undefined,
   }) //when selecting a note, open a modal asking to edit the text, delete the note, or change the list the note is in.
-  const [data, setData] = useState([])
+  const [data, setData] = useState<ListType[]>([])
 
   useEffect(() => {
     axios.get(`${URL}/tasks`).then((res) => {
@@ -20,9 +21,10 @@ function Kanban() {
     })
   }, [])
 
-  const handleNoteDelete = (listId: number, noteId: number) => {
+  const handleNoteDelete = (listId: string, noteId: string) => {
     const selectedList = data.find((lists) => lists.id === listId) //This selects the list the note is in
-    const updatedNotes = selectedList?.notes.filter(
+
+    const updatedNotes = selectedList?.notes?.filter(
       (note) => note.id !== noteId
     ) //selectedList is an object
     const updatedList = {
@@ -36,12 +38,12 @@ function Kanban() {
     setActiveNote({ listId: undefined, note: undefined })
   }
 
-  const handleAddNote = (listId) => {
-    const selectedList = data.find((lists) => lists.id === listId) //when clicking `Add Note`, we need to know what list its from. This selects the list
+  const handleAddNote = (listId: string) => {
+    const selectedList = data.find((list) => list.id === listId) //when clicking `Add Note`, we need to know what list its from. This selects the list
 
     const newNote = {
-      id: selectedList.notes.length + 1,
-      body: 'New note',
+      id: uuidv4(),
+      body: 'New Note',
     }
 
     const updatedList = {
@@ -55,9 +57,9 @@ function Kanban() {
     setData(data.map((list) => (list.id === listId ? updatedList : list))) //updates the state with the updated list
   }
 
-  const handleNoteClick = (listId, noteId) => {
-    let newArray = []
-    data.map((lists) => (newArray = newArray.concat(lists.notes)))
+  const handleNoteClick = (listId: string, noteId: string) => {
+    const newArray: Note[] = []
+    data.map((lists) => newArray.push(lists.notes))
 
     setActiveNote({
       listId,

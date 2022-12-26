@@ -1,15 +1,15 @@
 export type Note = {
-  id: number
+  id: string
   body: string
 }
 
 export type List = {
-  id: number
+  id: string
   title: string
   notes?: Note[]
 }
 
 export type ActiveNote = {
-  listId: number | undefined
-  note: Note | undefined
+  listId?: string
+  note?: Note
 }

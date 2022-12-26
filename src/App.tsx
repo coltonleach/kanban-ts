@@ -1,4 +1,4 @@
-import Kanban from './pages/kanban'
+import Kanban from './pages/Kanban'
 
 function App() {
   return (
